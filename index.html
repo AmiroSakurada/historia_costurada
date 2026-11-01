@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f0e12" />
+  <title>Dois meses do outro lado da porta — História Costurada</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css?v=13" />
+</head>
+<body>
+  <!-- Audio -->
+  <audio id="song" preload="auto" playsinline>
+    <source src="audio/Doismeses.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Music control (mobile-safe) -->
+  <button type="button" class="music-btn" id="musicBtn" aria-label="Tocar música" aria-pressed="false">
+    <span class="music-btn__icon music-btn__icon--play" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5.14v13.72L19 12 8 5.14z"/></svg>
+    </span>
+    <span class="music-btn__icon music-btn__icon--pause" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M6 5h4v14H6V5zm8 0h4v14h-4V5z"/></svg>
+    </span>
+    <span class="music-btn__label">música</span>
+  </button>
+
+  <!-- Ambient dust particles -->
+  <div class="dust" aria-hidden="true" id="dust"></div>
+
+  <!-- Background atmosphere -->
+  <div class="atmosphere" aria-hidden="true"></div>
+
+  <!-- ========== HERO ========== -->
+  <header class="hero">
+    <div class="hero__badge">
+      <span class="hero__badge-dot"></span>
+      <span class="hero__badge-text">uma história costurada a dois</span>
+    </div>
+
+    <!-- Door logo that opens -->
+    <div class="door" id="door" aria-hidden="true">
+      <div class="door__frame">
+        <div class="door__panel door__panel--left">
+          <div class="door__wood"></div>
+          <div class="door__handle door__handle--left"></div>
+          <div class="door__stitch"></div>
+        </div>
+        <div class="door__panel door__panel--right">
+          <div class="door__wood"></div>
+          <div class="door__handle door__handle--right"></div>
+          <div class="door__stitch"></div>
+        </div>
+        <div class="door__threshold"></div>
+      </div>
+    </div>
+
+    <h1 class="hero__title">
+      <span class="hero__line hero__line--gold">Dois meses</span>
+      <span class="hero__line">do outro lado</span>
+      <span class="hero__line hero__line--italic">da porta</span>
+    </h1>
+
+    <div class="hero__divider" aria-hidden="true">
+      <span class="hero__divider-line"></span>
+      <span class="hero__divider-diamond"></span>
+      <span class="hero__divider-line"></span>
+    </div>
+
+    <p class="hero__lead">
+      Não é sobre contar dias. É sobre como cada foto foi costurada na outra,
+      até virar história. Fio dourado, ponto pequeno, respiro fundo.
+    </p>
+
+    <div class="hero__scroll">
+      <span class="hero__scroll-label">role devagar</span>
+      <span class="hero__scroll-line"></span>
+    </div>
+  </header>
+
+  <!-- ========== THREAD + CHAPTERS ========== -->
+  <main class="story" id="story">
+    <!-- Golden thread path (desktop) -->
+    <div class="thread" aria-hidden="true">
+      <svg class="thread__svg" viewBox="0 0 80 4220" preserveAspectRatio="none">
+        <defs>
+          <filter id="threadGlow">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <path class="thread__path-bg" d="M 40 0 C 10 140, 70 260, 40 400 C 12 540, 68 640, 40 780 C 15 920, 65 1020, 40 1160 C 10 1300, 70 1400, 40 1540 C 12 1680, 68 1780, 40 1920 C 15 2060, 65 2160, 40 2300 C 10 2440, 70 2540, 40 2680 C 12 2820, 68 2920, 40 3060 C 15 3200, 65 3300, 40 3440 C 20 3580, 60 3720, 40 3860 C 20 3980, 60 4080, 40 4220" />
+        <path class="thread__path" id="threadPath" d="M 40 0 C 10 140, 70 260, 40 400 C 12 540, 68 640, 40 780 C 15 920, 65 1020, 40 1160 C 10 1300, 70 1400, 40 1540 C 12 1680, 68 1780, 40 1920 C 15 2060, 65 2160, 40 2300 C 10 2440, 70 2540, 40 2680 C 12 2820, 68 2920, 40 3060 C 15 3200, 65 3300, 40 3440 C 20 3580, 60 3720, 40 3860 C 20 3980, 60 4080, 40 4220" />
+      </svg>
+      <div class="thread__bead" id="threadBead"></div>
+    </div>
+
+    <!-- Chapters injected by JS -->
+    <div class="chapters" id="chapters"></div>
+  </main>
+
+  <!-- ========== CLOSING ========== -->
+  <section class="closing">
+    <div class="closing__card">
+      <div class="closing__inner">
+        <div class="closing__heart" aria-hidden="true">
+          <svg viewBox="0 0 120 110" class="closing__heart-svg">
+            <defs>
+              <radialGradient id="heartGrad" cx="50%" cy="40%" r="70%">
+                <stop offset="0%" stop-color="#f2cbc3" />
+                <stop offset="45%" stop-color="#e8b4a8" />
+                <stop offset="100%" stop-color="#c47a6d" />
+              </radialGradient>
+              <filter id="heartGlow">
+                <feGaussianBlur stdDeviation="3.5" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <path
+              d="M60 94
+                 C 18 68, -2 38, 20 20
+                 C 34 10, 48 14, 60 30
+                 C 72 14, 86 10, 100 20
+                 C 122 38, 102 68, 60 94 Z"
+              fill="url(#heartGrad)"
+              stroke="var(--gold)"
+              stroke-width="1.2"
+              stroke-dasharray="3.5 4.5"
+              stroke-linecap="round"
+              filter="url(#heartGlow)"
+              class="closing__heart-path"
+            />
+            <g stroke="rgba(0,0,0,0.22)" stroke-width="0.7" stroke-linecap="round" opacity="0.55">
+              <path d="M32 38 L35 41" />
+              <path d="M42 30 L45 33" />
+              <path d="M76 30 L79 33" />
+              <path d="M86 38 L89 41" />
+              <path d="M60 50 L60 54" />
+              <path d="M50 62 L53 65" />
+              <path d="M68 62 L71 65" />
+            </g>
+          </svg>
+          <span class="closing__float closing__float--1">♥</span>
+          <span class="closing__float closing__float--2">♥</span>
+          <span class="closing__float closing__float--3">✦</span>
+        </div>
+
+        <h2 class="closing__title">
+          <span>Dois meses</span>
+          <span class="closing__title-gold">do outro lado da porta,</span>
+          <span class="closing__title-sub">e eu ainda quero costurar cada dia contigo</span>
+        </h2>
+
+        <div class="closing__divider" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+
+        <p class="closing__text">
+          Obrigada por atravessar a porta comigo. Que venham muitos fios,
+          muitas fotos tortas, muitos quase-beijos que viram festa.
+          Costurado à mão, com linha dourada.
+        </p>
+
+        <div class="closing__seal">
+          <span>feito à mão, com linha dourada — 2 meses</span>
+          <span class="closing__seal-heart">♥</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span class="footer__left">feito à mão, com linha dourada — 2 meses · costurado a dois · <span id="year"></span></span>
+    <span class="footer__right">com linha dourada, ponto a ponto</span>
+  </footer>
+
+  <script src="js/script.js?v=13"></script>
+</body>
+</html>
